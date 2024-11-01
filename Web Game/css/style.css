@@ -1,0 +1,8 @@
+.overlay-text {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    color: aqua;
+}
+/* use this method as it is more resposive to the web page and will overall benefit */
