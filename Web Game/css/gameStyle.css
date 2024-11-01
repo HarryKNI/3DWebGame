@@ -1,8 +1,6 @@
-h1 {
-    text-align: center;
-    color: red;
-}
-
-body {
-    text-align: center;
+.bck-btn {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    transform: translate(-50%, -50%);
 }

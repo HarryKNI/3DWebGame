@@ -62,13 +62,13 @@ const addPlane =(x, y, w, h, materialaspect) => {
 	scene.add( plane );
 }
 
-const texture = new THREE.TextureLoader().load("/resources/img/goldpattern.png");
+const texture = new THREE.TextureLoader().load("/resources/img/snowpattern.png");
 const materialAspectFloor = {
 	map:texture,
 	side: THREE.DoubleSide,
 	transparent:true
 }
-addPlane(0, -3.6, 30, 30, materialAspectFloor);
+addPlane(0, -6, 30, 30, materialAspectFloor);
 
 const player = new THREE.Mesh(geometry1, material1);
 scene.add(player);
@@ -95,7 +95,7 @@ function animate() {
 	}
 
 	if ((player.position.y > 1) && !changed){
-		player.material.color.setHex(oxE70DA6);
+		player.material.color.setHex(0xE70DA6);
 
 		changed=true;
 	}
@@ -119,7 +119,7 @@ window.addEventListener('resize', onWindowResize);
 const createskybox = () => {
 	let bgMesh;
 	const loader = new THREE.TextureLoader();
-	loader.load("/resources/img/galaxy.jpg", function(texture){
+	loader.load("/resources/img/skybox.jpg", function(texture){
 		const SphereGeometry = new THREE.SphereGeometry(100, 60, 40);
 		const SphereMaterial = new THREE.MeshBasicMaterial( { 
 			map: texture,
@@ -167,6 +167,11 @@ loader.load(
         mesh = gltf.scene;
         mesh.scale.set(0.3, 0.3, 0.3);
         scene.add(mesh); //add GLTF to the scene
+
+		mixer = new THREE.AnimationMixer(mesh);
+		gltf.animations.forEach((clip) =>{
+			mixer.clipAction(clip).play();
+		})
  
     },
     // called when loading is in progresses
