@@ -1,0 +1,98 @@
+body {
+    background-color: lightskyblue;
+    
+}
+
+h1 {
+    color: rgb(236, 12, 12);
+    text-align: center;
+}
+
+.mainmenu {
+    color: black
+}
+
+p {
+    font-family: verdana;
+    font-size: 20px;
+}
+
+button{
+    padding: 15px 20px;
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: white;
+    transition-duration: 0.4s;
+    border-radius: 8px;
+}
+
+button:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px)
+}
+
+button:hover {
+    color: white;
+    cursor: pointer;
+}
+
+.btn-group .button {
+    display: block;
+    margin: auto;
+}
+
+
+.btn-group .button:not(:last-child) {
+    border-bottom: none;
+}
+
+
+
+.threejs {
+    border: 2px solid black;
+}
+
+.threejs:hover {
+    background-color: black;
+}
+
+.threejs:active {
+    background-color: black;
+}
+
+.play {
+    border: 2px solid red;
+}
+
+.play:hover{
+    background-color: red;
+}
+
+.play:active {
+    background-color: red;
+  }
+
+.settings {
+    border: 2px solid green;
+}
+
+.settings:hover {
+    background-color: green;
+}
+
+.settings:active {
+    background-color: green;
+}
+
+.controls {
+    border: 2px solid blue;
+}
+
+.controls:hover {
+    background-color: blue;
+}
+
+.controls:active {
+    background-color: blue;
+}
+
