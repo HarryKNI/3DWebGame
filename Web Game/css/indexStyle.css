@@ -96,3 +96,10 @@ button:hover {
     background-color: blue;
 }
 
+.sgn-out-btn-vis-dis {
+    visibility: hidden;
+}
+
+.sgn-out-btn-vis-apr {
+    visibility: visible;
+}

@@ -16,17 +16,25 @@ document.body.appendChild( renderer.domElement );
 camera.position.z = 10;
 camera.position.y = 5;
 
+//create wall for collsion with the player
+const geometry = new THREE.BoxGeometry( 6, 1, 1 );
+const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+const cube = new THREE.Mesh( geometry, material );
+scene.add(cube);
+
 // Main player Creation Mesh
 let playerBodyMesh;
     const loader = new THREE.TextureLoader();
     loader.load("/resources/img/white.png", function(texture){
-        const playerBodyGeo = new THREE.CapsuleGeometry( 1, 1, 4, 8);
+        const playerBodyGeo = new THREE.CapsuleGeometry( 1, 1, 2, 4);
         const playerBodyMat = new THREE.MeshBasicMaterial( {
             map: texture
         })
     playerBodyMesh = new THREE.Mesh(playerBodyGeo, playerBodyMat);
     scene.add(playerBodyMesh);
     })
+
+    
 
 
 // create the movement for the player 
@@ -44,10 +52,10 @@ const playerMovement = () => {
     }
 }
 
-
 function animate() { 
 
-   
+    cube.position.x = 4;
+   cube.position.y = 8;
 
     playerMovement();
 
