@@ -26,10 +26,25 @@ const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
 const cube = new THREE.Mesh( geometry, material );
 scene.add(cube);
 
+let Floor;
+const loaderfloor = new THREE.TextureLoader();
+    loaderfloor.load("/resources/img/ShipFloor.png", function(texture){
+        const FloorGeo = new THREE.PlaneGeometry( 30, 30, 2
+        );
+        const FloorMat = new THREE.MeshBasicMaterial( {
+            map: texture,
+            side: THREE.DoubleSide
+        })
+        Floor = new THREE.Mesh(FloorGeo, FloorMat);
+        Floor.rotation.x = -Math.PI/2;
+        scene.add(Floor);
+    })    
+
+
 // Main player Creation Mesh
 let playerBodyMesh;
     const loader = new THREE.TextureLoader();
-    loader.load("/resources/img/white.png", function(texture){
+    loader.load("/resources/img/iron.png", function(texture){
         const playerBodyGeo = new THREE.CapsuleGeometry( 1, 1, 2, 4);
         const playerBodyMat = new THREE.MeshBasicMaterial( {
             map: texture
