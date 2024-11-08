@@ -2,8 +2,10 @@ import * as THREE from 'three';
 
 import { OrbitControls } from 'https://unpkg.com/three@0.157.0/examples/jsm/controls/OrbitControls.js';
 
-let controls;
+import Stats from 'https://unpkg.com/three@0.169.0/examples/jsm/libs/stats.module.js';
 
+let controls;
+let stats;
 let upstate = false;
 let downstate = false;
 let changed = false;
@@ -35,6 +37,41 @@ const SphGeometry = new THREE.SphereGeometry(1, 4, 3);
 const SphMaterial = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
 const Sphere = new THREE.Mesh( SphGeometry, SphMaterial);
 Sphere.add(cube);
+
+const Geo = new THREE.BoxGeometry( 20, 20, 20);
+
+for (let i =0; i < 2000; i ++)
+{
+	const object = new THREE.Mesh( Geo, new THREE.MeshLambertMaterial( {color: Math.random() * 0xffffff } ) );
+
+	object.position.x = Math.random() * 800 - 400;
+	object.position.y = Math.random() * 800 - 400;
+	object.position.z = Math.random() * 800 - 400;
+
+	object.rotation.x = Math.random() * 2 * Math.PI;
+	object.rotation.y = Math.random() * 2 * Math.PI;
+	object.rotation.z = Math.random() * 2 * Math.PI;
+
+	object.scale.x = Math.random() + 0.5;
+	object.scale.y = Math.random() + 0.5;
+	object.scale.z = Math.random() + 0.5;
+
+	scene.add( object );
+}
+
+const Seo = new THREE.SphereGeometry();
+for ( let i = 0; i <2000; i ++)
+{
+	const material4 = new THREE.MeshPhongMaterial({color:0x2eabef});
+	const object1 = new THREE.Mesh( Seo, material4);
+	object1.position.x = Math.random() * 50 - 25;
+	object1.position.y = Math.random() * 50 - 25;
+	object1.position.z = Math.random() * 50 - 25;
+
+	object1.scale.set(0.5, 0.5, 0.5);
+	object1.material.color.setHex(Math.random() * 0xffffff);
+	scene.add(object1);
+}
 
 
 camera.position.z = 10;
@@ -79,31 +116,7 @@ scene.add( directionalLight );
 const light = new THREE.AmbientLight( 0x404040 ); // soft white light
 scene.add( light );
 
-function animate() {
 
-	Sphere.rotation.x += 0.01;
-	MiniGroup.rotation.x += 0.02;
-	MiniGroup.rotation.y += 0.02;
-	group.rotation.y += 0.01;
-
-	if(upstate){
-		player.position.y += 0.02;
-
-	}else if(downstate){
-		player.position.y -= 0.02;
-
-	}
-
-	if ((player.position.y > 1) && !changed){
-		player.material.color.setHex(0xE70DA6);
-
-		changed=true;
-	}
-
-	renderer.render(scene, camera );
-
-	
-}
 
 const onWindowResize = () => {
 
@@ -188,4 +201,34 @@ loader.load(
 );
  
 //GLTF
- 
+
+stats = new Stats();
+document.body.appendChild( stats.dom );
+
+function animate() {
+
+
+	stats.update();
+	Sphere.rotation.x += 0.01;
+	MiniGroup.rotation.x += 0.02;
+	MiniGroup.rotation.y += 0.02;
+	group.rotation.y += 0.01;
+
+	if(upstate){
+		player.position.y += 0.02;
+
+	}else if(downstate){
+		player.position.y -= 0.02;
+
+	}
+
+	if ((player.position.y > 1) && !changed){
+		player.material.color.setHex(0xE70DA6);
+
+		changed=true;
+	}
+
+	renderer.render(scene, camera );
+
+	
+}

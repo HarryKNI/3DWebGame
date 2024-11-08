@@ -1,5 +1,9 @@
 import * as THREE from 'three';
+import Stats from 'https://unpkg.com/three@0.169.0/examples/jsm/libs/stats.module.js';
+import { OrbitControls } from 'https://unpkg.com/three@0.157.0/examples/jsm/controls/OrbitControls.js';
 
+let stats;
+let controls;
 let rightpressed = false;
 let leftpressed = false;
 let uppressed = false;
@@ -52,10 +56,22 @@ const playerMovement = () => {
     }
 }
 
+const createControls =()=>{
+	controls = new OrbitControls(camera, renderer.domElement);
+	controls.update();
+}
+
+createControls();
+
+stats = new Stats();
+document.body.appendChild( stats.dom );
+
 function animate() { 
 
+    stats.update();
+    
     cube.position.x = 4;
-   cube.position.y = 8;
+   cube.position.y = 4;
 
     playerMovement();
 
@@ -65,7 +81,7 @@ function animate() {
 const createskybox = () => {
 	let bgMesh;
 	const loader = new THREE.TextureLoader();
-	loader.load("/resources/img/skybox.jpg", function(texture){
+	loader.load("/resources/img/ringed_gas_giant_planet.png", function(texture){
 		const SphereGeometry = new THREE.SphereGeometry(100, 60, 40);
 		const SphereMaterial = new THREE.MeshBasicMaterial( { 
 			map: texture,
