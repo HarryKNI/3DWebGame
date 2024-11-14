@@ -2,12 +2,18 @@ import * as THREE from 'three';
 import Stats from 'https://unpkg.com/three@0.169.0/examples/jsm/libs/stats.module.js';
 import { OrbitControls } from 'https://unpkg.com/three@0.157.0/examples/jsm/controls/OrbitControls.js';
 
+
 let stats;
 let controls;
 let rightpressed = false;
 let leftpressed = false;
 let uppressed = false;
 let downpressed = false;
+
+let animationActions = [];
+let mixer;
+let activeAction;
+let lastAction;
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -53,6 +59,8 @@ let playerBodyMesh;
     scene.add(playerBodyMesh);
     })
 
+
+
     
 
 
@@ -60,8 +68,10 @@ let playerBodyMesh;
 const playerMovement = () => {
     if (rightpressed){
         playerBodyMesh.position.x += 0.2;
+        playerBodyMesh.rotation.x = 90;
     } else if (leftpressed) {
         playerBodyMesh.position.x -= 0.2;
+        playerBodyMesh.rotation.x = 270;s
     }
 
     if (downpressed) {
@@ -84,6 +94,8 @@ document.body.appendChild( stats.dom );
 function animate() { 
 
     stats.update();
+
+
     
     cube.position.x = 4;
    cube.position.y = 4;
@@ -147,8 +159,45 @@ function keyUpHandler(event) {
 }
 
 
+const clock = new THREE.Clock();
 
+loader.load(
+    'scene.gltf',  // called when the resource is loaded
+ 
+    (gltf) => {
+        mesh = gltf.scene;
+        mesh.scale.set(15, 15, 15);
+        scene.add(mesh); //add GLTF to the scene
 
+		mixer = new THREE.AnimationMixer(gtlf.scene);
+		gltf.animations.forEach((clip) =>{
+			mixer.clipAction(clip);
+		})
+
+        animationActions.push(animationActions);
+ 
+    },
+
+    
+    // called when loading is in progresses
+ 
+    (xhr) => {
+        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+ 
+    },
+    // called when loading has errors
+ 
+    (error) => {
+        console.log('An error happened' + error);
+    }
+);
+
+const render=()=> {
+       requestAnimationFrame( render );
+       
+       if ( mixer ) mixer.update( 0.01 );
+       renderer.render(scene, camera);
+}
 
 
 
