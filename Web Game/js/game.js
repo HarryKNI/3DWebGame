@@ -34,7 +34,7 @@ scene.add(cube);
 
 let Floor;
 const loaderfloor = new THREE.TextureLoader();
-    loaderfloor.load("/resources/img/ShipFloor.png", function(texture){
+    loaderfloor.load("/img/ShipFloor.png", function(texture){
         const FloorGeo = new THREE.PlaneGeometry( 30, 30, 2
         );
         const FloorMat = new THREE.MeshBasicMaterial( {
@@ -50,7 +50,7 @@ const loaderfloor = new THREE.TextureLoader();
 // Main player Creation Mesh
 let playerBodyMesh;
     const loader = new THREE.TextureLoader();
-    loader.load("/resources/img/iron.png", function(texture){
+    loader.load("/img/iron.png", function(texture){
         const playerBodyGeo = new THREE.CapsuleGeometry( 1, 1, 2, 4);
         const playerBodyMat = new THREE.MeshBasicMaterial( {
             map: texture
@@ -108,7 +108,7 @@ function animate() {
 const createskybox = () => {
 	let bgMesh;
 	const loader = new THREE.TextureLoader();
-	loader.load("/resources/img/ringed_gas_giant_planet.png", function(texture){
+	loader.load("/img/ringed_gas_giant_planet.png", function(texture){
 		const SphereGeometry = new THREE.SphereGeometry(100, 60, 40);
 		const SphereMaterial = new THREE.MeshBasicMaterial( { 
 			map: texture,
