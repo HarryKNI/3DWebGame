@@ -1,0 +1,55 @@
+let upstate = false;
+let downstate = false;
+let leftstate = false;
+let rightstate = false;
+
+const moveup = ()=>{
+	upstate = true;
+	downstate = false;
+	leftstate = false;
+	rightstate = true;
+}
+
+const movedown = ()=>{
+	upstate = false;
+	downstate = true;
+	leftstate = false;
+	rightstate = false;
+}
+
+const moveleft = ()=>{
+	upstate = false;
+	downstate = false;
+	leftstate = true;
+	rightstate = false;
+}
+
+const moveright = ()=>{
+	upstate = false;
+	downstate = false;
+	leftstate = false;
+	rightstate = true;
+}
+
+
+document.getElementById("upbutton").addEventListener("click", moveup);
+document.getElementById("downbutton").addEventListener("click", movedown);
+document.getElementById("leftbutton").addEventListener("click", moveleft);
+document.getElementById("rightbutton").addEventListener("click", moveright);
+if(upstate){
+		player.position.z -= 0.02;
+
+	}else if(downstate){
+		player.position.z += 0.02;
+
+	}
+if (leftstate) {
+		player.position.x -= 0.02;
+}(rightstate) {
+		player.position.x += 0.02;
+	}
+
+<button id="upbutton">DOWN</button>
+            <button id="downbutton">UP</button>
+            <button id="leftbutton">LEFT</button>
+            <button id="rightbutton">RIGHT</button>
