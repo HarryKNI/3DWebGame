@@ -11,6 +11,10 @@ let rightpressed = false;
 let leftpressed = false;
 let uppressed = false;
 let downpressed = false;
+let upstate = false;
+let downstate = false;
+let leftstate = false;
+let rightstate = false;
 
 let animationActions = [];
 let mixer;
@@ -40,7 +44,7 @@ scene.add(cube);
 
 let Floor;
 const loaderfloor = new THREE.TextureLoader();
-    loaderfloor.load("/resources/img/ShipFloor.png", function(texture){
+    loaderfloor.load("/Web Game/static/resources/img/ShipFloor.png", function(texture){
         const FloorGeo = new THREE.PlaneGeometry( 100, 100, 4
         );
         const FloorMat = new THREE.MeshBasicMaterial( {
@@ -57,7 +61,7 @@ const loaderfloor = new THREE.TextureLoader();
 //sceond player floor
 let Floor1;
 const loaderfloor1 = new THREE.TextureLoader();
-    loaderfloor1.load("/resources/img/ShipFloor.png", function(texture){
+    loaderfloor1.load("/Web Game/static/resources/img/ShipFloor.png", function(texture){
         const FloorGeo1 = new THREE.PlaneGeometry( 100, 100, 4
         );
         const FloorMat1 = new THREE.MeshBasicMaterial( {
@@ -75,7 +79,7 @@ let playerBodyMesh;
 let Face;
 let player;
     const loader = new THREE.TextureLoader();
-    loader.load("/resources/img/iron.png", function(texture){
+    loader.load("/Web Game/static/resources/img/iron.png", function(texture){
         const playerBodyGeo = new THREE.CapsuleGeometry( 1, 1, 5, 9);
         const playerBodyMat = new THREE.MeshBasicMaterial( {
             map: texture
@@ -147,6 +151,20 @@ function animate() {
    cube.position.y = 4;
 
     playerMovement();
+
+    if(upstate){
+		player.position.z += 0.02;
+
+	}else if(downstate){
+		player.position.z -= 0.02;
+
+	}
+
+    if (leftstate){
+        player.position.x -= 0.02;
+    }else if(rightstate){
+        player.position.x += 0.02;
+    }
     
     renderer.render(scene, camera );
 }
@@ -157,7 +175,7 @@ function animate() {
 const createskybox = () => {
 	let bgMesh;
 	const loader = new THREE.TextureLoader();
-	loader.load("/resources/img/Skybox.png", function(texture){
+	loader.load("/Web Game/static/resources/img/Skybox.png", function(texture){
 		const SphereGeometry = new THREE.SphereGeometry(200, 120, 80);
 		const SphereMaterial = new THREE.MeshBasicMaterial( { 
 			map: texture,
@@ -171,6 +189,39 @@ const createskybox = () => {
 
 createskybox();
 
+const moveup = ()=>{
+	upstate = true;
+	downstate = false;
+    leftstate = false;
+    rightstate = false;
+}
+
+const movedown = ()=>{
+	upstate = false;
+	downstate = true;
+    leftstate = false;
+    rightstate = false;
+}
+
+const moveleft = ()=>{
+    leftstate = true;
+    rightstate = false;
+    upstate = false;
+    downstate = false;
+}
+
+const moveright = ()=>{
+    leftstate = false;
+    rightstate = true;
+    upstate = false;
+    downstate = false;
+}
+
+document.getElementById("upbutton").addEventListener("click", moveup);
+document.getElementById("downbutton").addEventListener("click", movedown);
+document.getElementById("leftbutton").addEventListener("click", moveleft);
+document.getElementById("rightbutton").addEventListener("click", moveright);
+
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
@@ -179,16 +230,33 @@ document.addEventListener("keyup", keyUpHandler, false);
 function keyDownHandler(event) {
     if (event.code == "KeyD") {
         rightpressed = true;
+        leftstate = false;
+        rightstate = false;
+        upstate = false;
+        downstate = false;
+
 
     }else if (event.code == "KeyA") {
         leftpressed = true;
+        leftstate = false;
+        rightstate = false;
+        upstate = false;
+        downstate = false;
     }
 
     if (event.code == "KeyS") {
         downpressed = true;
+        leftstate = false;
+        rightstate = false;
+        upstate = false;
+        downstate = false;
 
     }else if (event.code == "KeyW") {
         uppressed = true;
+        leftstate = false;
+        rightstate = false;
+        upstate = false;
+        downstate = false;
     }
 }
 

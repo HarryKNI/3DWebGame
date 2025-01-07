@@ -6,16 +6,20 @@
             Game Page
         </title>
         <meta name="viewport" content="width-device-width, initial-scale-1.0">
-        <link href="/css/gameStyle.css" rel="stylesheet" type="text/css" />
+        <link href="/Web Game/static/css/gameStyle.css" rel="stylesheet" type="text/css" />
     </head>
 
     <body>
         <div class="bck-btn">
-            <a href="/index.html">
+            <a href="/Web Game/static/index.html">
                 <button>Back</button>
             </a>
             <div>Compartments:  5</div>
             <div>Score: 800</div>
+            <button id="upbutton">DOWN</button>
+            <button id="downbutton">UP</button>
+            <button id="leftbutton">LEFT</button>
+            <button id="rightbutton">RIGHT</button>
         </div>
 
 
@@ -23,5 +27,5 @@
  
         <script type="importmap">  {    "imports": {      "three": "https://unpkg.com/three@0.169.0/build/three.module.js"    }  }    </script>
    
-        <script type="module" src="/js/game.js"></script>
+        <script type="module" src="/Web Game/static/js/game.js"></script>
     </body>
